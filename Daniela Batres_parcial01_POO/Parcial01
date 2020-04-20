@@ -1,0 +1,289 @@
+Main
+
+package com_DRBA_POO;
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) throws invalidInputException, IllegalArgumentException {
+        Scanner Empleado = new Scanner(System.in);
+        String nombre;
+        String puesto;
+        int mesesContrato;
+        double salario = 0, AFP = 0, ISSS = 0, renta = 0.1, salariofinal;
+        double restante;
+
+
+                    System.out.println("Servicio Profesional: ");
+                    Scanner entrada = new Scanner(System.in);
+                    System.out.println("Introduzca el nombre del empleado: ");
+                    nombre = entrada.next();
+
+                    System.out.println("Introduzca el puesto del empledo: ");
+                    puesto = entrada.next();
+
+                    System.out.println("Introduzca el salario del empleado: ");
+                    salario = entrada.nextDouble();
+
+                    if (salario > 0) {
+                        renta = salario * 0.1;
+                    }
+                    salariofinal = salario - renta;
+                    System.out.println("El salario del empledo es:" + salariofinal);
+
+
+                    ServicioProfesional sp = new ServicioProfesional(nombre, puesto, salario);
+
+                    System.out.println("Plaza Fija");
+                    Scanner entrada1 = new Scanner(System.in);
+                    System.out.println("Introduzca el nombre del empleado: ");
+                    nombre = entrada1.next();
+
+                    System.out.println("Introduzca el puesto del empledo: ");
+                    puesto = entrada1.next();
+
+                    System.out.println("Introduzca el salario del empleado: ");
+                    salario = entrada1.nextDouble();
+
+                    System.out.println("Introduzca los meses de contrato: ");
+                    mesesContrato = entrada1.nextInt();
+
+                    if (mesesContrato > 0) {
+                        double totaldemeses;
+                        totaldemeses = salario * mesesContrato;
+                        System.out.println("el sueldo del empleado por meses es de : " + totaldemeses);
+
+                        AFP = salario * 0.065;
+                        ISSS = salario * 0.03;
+                        salario = (salario - AFP - ISSS);
+                        System.out.println("El salario neto sin renta es: " + salario);
+                    } else {
+                        if (salario <= 472) {
+                            System.out.println("El salario neto sin renta es: " + salario);
+                            throw new IllegalArgumentException();
+                        } else {
+                            if (salario <= 895.24) {
+                                renta = 0.1 * (salario - 472) + 17.67;
+                                salario = salario - AFP - ISSS - renta;
+                                System.out.println("El valor de la renta es de: " + salario);
+                                throw new IllegalArgumentException();
+                            } else {
+                                if (salario <= 2038.10) {
+                                    renta = 0.2 * (salario - 895.24) + 60;
+                                    salario = salario - AFP - ISSS - renta;
+                                    System.out.println("El valor de la renta es de: ");
+                                    throw new IllegalArgumentException();
+                                }
+                            }
+                            PlazaFIja pf = new PlazaFIja(nombre, puesto, salario);
+                        }
+                    }
+
+            }
+        }
+      
+Clase CalculadoImpuestos
+
+package com_DRBA_POO;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicReference;
+
+public class CalculadorImpuestos extends PlazaFIja {
+
+    private Double TotaldeRenta, TotalISSS, TotalAFP;
+    String empleado;
+    String Empleado;
+
+    public CalculadorImpuestos(String Nombre, String Puesto, Double Salario, int extension, Double AFP,
+                               Double ISSS, Double salario, Double renta, Double totaldeRenta, Double totalISSS,
+                               Double totalAFP, String empleado) {
+        super(Nombre, Puesto, Salario, extension, AFP, ISSS, salario, renta);
+        TotaldeRenta = totaldeRenta;
+        TotalISSS = totalISSS;
+        TotalAFP = totalAFP;
+        this.empleado = empleado;
+    }
+
+    private void CalculadorImpuestos() {
+        class InstanceofServicioProfesional {
+            void main(String args) {
+                int mesesContrato = 0;
+                String nombre, puesto;
+                Double salario;
+                Double renta = 0.1, salariofinal;
+
+                Scanner entrada = new Scanner(System.in);
+                salario = entrada.nextDouble();
+
+                if (salario > 0) {
+                    salario = salario * mesesContrato;
+                }
+                if (salario > 0) {
+                    renta = salario * 0.1;
+                }
+
+                salariofinal = salario - renta;
+                System.out.println("El salario del empledo es:" + salariofinal);
+
+            }
+
+            class InstanceofPlazaFija {
+                void main(String args) {
+                    int mesesContrato = 0;
+                    String nombre, puesto;
+                    Double salario = null;
+                    double renta ;
+                    AtomicReference<Double> salariofinal = null;
+                    double AFP = 0;
+                    Double ISSS = null;
+                    Double restante;
+                    if (mesesContrato > 0) {
+                        double totaldemeses;
+                        totaldemeses = salario * mesesContrato;
+                        System.out.println("el sueldo del empleado por meses es de : " + totaldemeses);
+
+                        AFP = salario * 0.065;
+                        ISSS = salario * 0.03;
+                        salario = (salario - AFP - ISSS);
+                        System.out.println("El salario neto sin renta es: " + salario);
+                    } else {
+                        if (salario <= 472) {
+                            System.out.println("El salario neto sin renta es: " + salario);
+                        } else {
+                            if (salario <= 895.24) {
+                                renta = 0.1 * (salario - 472) + 17.67;
+                                salario = salario - AFP - ISSS - renta;
+                                System.out.println("El valor de la renta es de: " + salario);
+                            } else {
+                                if (salario <= 2038.10) {
+                                    renta = 0.2 * (salario - 895.24) + 60;
+                                    salario = salario - AFP - ISSS - renta;
+                                    System.out.println("El valor de la renta es de: ");
+                                }
+
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+Clase Empleado
+
+package com_DRBA_POO;
+
+public class Empleado {
+    protected String nombre, puesto;
+    protected Double salario;
+
+    public Empleado (String Nombre,String Puesto,Double Salario){
+        this.nombre=Nombre;
+        this.puesto=Puesto;
+        this.salario=Salario;
+    }
+
+    public Empleado() {
+
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getPuesto() {
+        return puesto;
+    }
+
+    public Double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(Double salario) {
+        this.salario = salario;
+    }
+}
+
+Clase ServicioProfesional
+
+package com_DRBA_POO;
+import java.util.Scanner;
+public class ServicioProfesional extends Empleado {
+
+    private int MesesContrato;
+    private String nombre, puesto;
+    private Double salario;
+    private Double renta = 0.1, Total,salariofinal;
+
+    public ServicioProfesional(String nombre, String puesto, double salario) {
+        super();
+    }
+
+
+    public int getMesesContrato() {
+        return MesesContrato;
+    }
+
+    public void setMesesContrato(int mesesContrato) {
+        MesesContrato = mesesContrato;
+    }
+
+    public ServicioProfesional(String Nombre, String Puesto, Double Salario) {
+        super(Nombre, Puesto, Salario);
+        this.nombre = nombre;
+        this.puesto = puesto;
+        this.salario = salario;
+        this.renta = renta;
+
+    }
+
+}
+
+Clase PlazaFija
+
+package com_DRBA_POO;
+public class PlazaFIja extends Empleado{
+
+    private int Extension;
+    private Double AFP, ISSS, salario,renta;
+
+    public PlazaFIja(String nombre, String puesto, double salario, int mesesContrato) {
+
+    }
+
+    public PlazaFIja(String nombre, String puesto, double salario) {
+    }
+
+
+    public int getExtension() {
+        return Extension;
+    }
+
+    public void setExtension(int extension) {
+        Extension = extension;
+    }
+
+    public PlazaFIja(String Nombre, String Puesto, Double Salario, int extension, Double AFP, Double ISSS, Double salario, Double renta) {
+        super(Nombre, Puesto, Salario);
+        Extension = extension;
+        this.AFP = AFP;
+        this.ISSS = ISSS;
+        this.salario = salario;
+        this.renta = renta;
+    }
+
+    public PlazaFIja(int extension, Double AFP, Double ISSS, Double salario, Double renta) {
+        Extension = extension;
+        this.AFP = AFP;
+        this.ISSS = ISSS;
+        this.salario = salario;
+        this.renta = renta;
+    }
+}
